@@ -4,6 +4,7 @@ fienderDrept = 0
 liv = 10
 fiendeLiv = 0
 
+
 def start():
     print("")
     print("Du har", liv, "liv")
@@ -13,7 +14,8 @@ def start():
     angrip = input("Vil du angripe? ")
     print("")
 
-liv = random.randint(5,10)
+
+liv = random.randint(5, 10)
 fortsett = "ja"
 while fortsett == "ja":
     fiendeLiv = random.randint(1, 10)
@@ -52,6 +54,3 @@ while fortsett == "ja":
                 fortsett = "nei"
     else:
         print("Du er død")
-
-
-
