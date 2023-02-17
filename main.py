@@ -24,6 +24,7 @@ while fortsett == "ja":
         if liv > fiendeLiv:
             print("Du drepte fienden")
             fienderDrept += 1
+            liv -= fiendeLiv
         else:
             print("Du er død")
             print("")
