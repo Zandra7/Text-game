@@ -3,7 +3,7 @@ import random
 fienderDrept = 0
 liv = 10
 fiendeLiv = 0
-møter = ['monster', 'kiste']
+møter = ['monster', 'monster', 'monster', 'kiste']
 
 def start():
     print("")
