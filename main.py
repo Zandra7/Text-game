@@ -18,6 +18,8 @@ def start():
 
 
 def tryAgain():  # Try again
+    global liv
+    liv = random.randint(5, 10)
     start()
 
 
