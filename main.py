@@ -3,7 +3,7 @@ import random
 fienderDrept = 0
 liv = 10
 fiendeLiv = 0
-møter = ['monster', 'monster', 'monster', 'monster', 'kiste'] # 1/5 sjanse for å finne en kiste
+møter = ['monster', 'monster', 'monster', 'kiste'] # 1/4 sjanse for å finne en kiste
 
 def start():
     print("")
@@ -22,12 +22,26 @@ while fortsett == "ja":
     if møte_type == "monster": # Hvis man møter et monster
         fiendeLiv = random.randint(1, 10)
         start()
-
         if angrip == "ja": # Hvis du vil angripe
             if liv > fiendeLiv: # Hvis du har mer liv enn fienden
                 print("Du drepte fienden")
                 fienderDrept += 1
                 liv -= fiendeLiv
+            elif liv == fiendeLiv: # Hvis du har like mye liv som fienden
+                liktLiv = random.randint(1, 2)
+                if liktLiv == 1: # Hvis du slår fienden
+                    print("Du drepte fienden")
+                    fienderDrept += 1
+                    liv -= fiendeLiv
+                else:
+                    print("Du er død")
+                    print("")
+                    prøvIgjen = input("Vil du prøve igjen? ")
+                    if prøvIgjen == "ja": # Hvis du vil prøve igjen                
+                        start()
+                    else: # Hvis du ikke vil prøve igjen
+                        print("Du beseiret", fienderDrept, "fiende(r)")
+                        fortsett = "nei"
             else: # Hvis du har mindre liv enn fienden
                 print("Du er død")
                 print("")
@@ -62,4 +76,5 @@ while fortsett == "ja":
         print("Du fant en kiste!")
         liv += 3
         print("Du fant 3 liv og du har nå", liv, "liv")
+        print("")
         fortsett = input("Vil du fortsette? ")
