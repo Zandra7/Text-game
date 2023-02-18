@@ -14,6 +14,17 @@ def start():
     angrip = input("Vil du angripe? ")
     print("")
 
+def tryAgain():
+    start()
+
+def notTryAgain():
+    if fienderDrept > 1:
+        print("Du beseiret", fienderDrept, "fiender")
+    else:
+        print("Du beseiret bare", fienderDrept, "fiende")
+    global fortsett
+    fortsett = "nei"
+
 liv = random.randint(5, 10)
 
 fortsett = "ja"
@@ -33,24 +44,22 @@ while fortsett == "ja":
                     print("Du drepte fienden")
                     fienderDrept += 1
                     liv -= fiendeLiv
-                else:
+                else: # Hvis du ikke slår fienden
                     print("Du er død")
                     print("")
                     prøvIgjen = input("Vil du prøve igjen? ")
                     if prøvIgjen == "ja": # Hvis du vil prøve igjen                
-                        start()
+                        tryAgain()
                     else: # Hvis du ikke vil prøve igjen
-                        print("Du beseiret", fienderDrept, "fiende(r)")
-                        fortsett = "nei"
+                        notTryAgain()
             else: # Hvis du har mindre liv enn fienden
                 print("Du er død")
                 print("")
                 prøvIgjen = input("Vil du prøve igjen? ")
                 if prøvIgjen == "ja": # Hvis du vil prøve igjen                
-                    start()
+                    tryAgain()
                 else: # Hvis du ikke vil prøve igjen
-                    print("Du beseiret", fienderDrept, "fiende(r)")
-                    fortsett = "nei"
+                    notTryAgain()
         elif angrip == "nei": # Hvis du ikke vil angripe
             print("Du prøver å stikke av")
             stikkAv = random.randint(1, 2)
@@ -62,13 +71,9 @@ while fortsett == "ja":
                 print("")
                 prøvIgjen = input("Vil du prøve igjen? ")
                 if prøvIgjen == "ja": # Hvis du vil prøve igjen
-                    start()
+                    tryAgain()
                 else: # Hvis du ikke vil prøve igjen
-                    if fienderDrept > 1:
-                        print("Du beseiret", fienderDrept, "fiender")
-                    else:
-                        print("Du beseiret bare", fienderDrept, "fiende")
-                    fortsett = "nei"
+                    notTryAgain()
         else: # Hvis du skriver noe annet enn ja/nei
             print("Du er død")
             fortsett = "nei"
