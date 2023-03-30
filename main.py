@@ -1,11 +1,16 @@
+# --- IMPORTS --- # 
+
 import random
 
-EnemiesKilled = 0
+# --- VARIABLES --- #
+
+enemiesKilled = 0
 health = 10
 enemyHealth = 0
 encounters = ['monster', 'monster', 'monster',
          'chest']  # 1/4 chance to find a chest
 
+# --- FUNCTIONS --- #
 
 def start():
     print("")
@@ -16,21 +21,56 @@ def start():
     attack = input("Do you want to attack? ")
     print("")
 
-
 def tryAgain():  # Try again
     global health
     health = random.randint(5, 10)
     start()
 
-
 def notTryAgain():  # Not trying again
-    if EnemiesKilled > 1:
-        print("You killed", EnemiesKilled, "enemies")
+    if enemiesKilled > 1:
+        print("You killed", enemiesKilled, "enemies")
     else:
-        print("You only killed", EnemiesKilled, "enemies")
+        print("You only killed", enemiesKilled, "enemies")
     global continiue
     continiue = "no"
+    
+def killEnemy(): # If you kill the enemy
+    print("You killed the enemy")
+    global enemiesKilled
+    enemiesKilled += 1
+    global health
+    health -= enemyHealth
 
+def death():
+    print("You are dead")
+    print("")
+    global retry
+    retry = input("Do you want to try again? ")
+    if retry == "yes":  # If you want to try again
+        tryAgain()
+    else:  # If you don't want to try again
+        notTryAgain()
+
+def deathRun():
+    print("You could not get away")
+    print("")
+    global retry
+    retry = input("Do you want to try again? ")
+    if retry == "yes":  # If you want to try again
+        tryAgain()
+    else:  # If you don't want to try again
+        notTryAgain()
+
+def findChest():
+    print("You found a chest!")
+    global health
+    health += random.randint(3, 5)
+    print("You found 3 lives and now have", health, "health")
+    print("")
+    global continiue
+    continiue = input("Do you want to continiue? ")
+
+# ------- CODE ------- #
 
 health = random.randint(5, 10)
 
@@ -42,31 +82,15 @@ while continiue == "yes":
         start()
         if attack == "yes":  # If you want to attack
             if health > enemyHealth:  # If you have more health than the enemy
-                print("You killed the enemy")
-                EnemiesKilled += 1
-                health -= enemyHealth
+                killEnemy()
             elif health == enemyHealth:  # If you have the same amount of health as the enemy
                 sameHealth = random.randint(1, 2)
                 if sameHealth == 1:  # If you beat the enemy
-                    print("You killed the enemy")
-                    EnemiesKilled += 1
-                    health -= enemyHealth
+                    killEnemy()
                 else:  # If you don't beat the enemy
-                    print("You are dead")
-                    print("")
-                    retry = input("Do you want to try again? ")
-                    if retry == "yes":  # If you want to try again
-                        tryAgain()
-                    else:  # If you don't want to try again
-                        notTryAgain()
+                    death()
             else:  # If you have less health than the enemy
-                print("You are dead")
-                print("")
-                retry = input("Do you want to try again? ")
-                if retry == "yes":  # If you want to try again
-                    tryAgain()
-                else:  # If you don't want to try again
-                    notTryAgain()
+                death()
         elif attack == "no":  # If you don't want to attack
             print("You try to run away")
             runAway = random.randint(1, 2)
@@ -74,19 +98,8 @@ while continiue == "yes":
                 print("You got away")
                 print("")
             else:  # If you don't get away
-                print("You could not get away")
-                print("")
-                retry = input("Do you want to try again? ")
-                if retry == "ja":  # If you want to try again
-                    tryAgain()
-                else:  # If you don't want to try again
-                    notTryAgain()
-        else:  # If you write something else than "ja/nei"
-            print("You are dead")
-            continiue = "no"
+                deathRun()
+        else:  # If you write something else than "yes/no"
+            death()
     elif encounter_type == "chest":  # If you find a chest
-        print("You found a chest!")
-        health += 3
-        print("You found 3 lives and now have", health, "health")
-        print("")
-        continiue = input("Do you want to continiue? ")
+        findChest()
