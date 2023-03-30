@@ -7,7 +7,7 @@ Welcome to Monster Hunter: Chest of Lives, a simple text-based game where you'll
 3. When you encounter a monster, you'll have to choose whether to attack or run away.
 4. If you defeat a monster, you'll earn one point and continue on to the next encounter.
 5. If you choose to run away, you'll also roll a random number to determine whether you escape or lose health.
-6. If you find a chest, you'll earn 3 health points.
+6. If you find a chest, you'll earn 3-5 health points.
 7. The game continues until you choose to stop or run out of health points.
 
 ## Requirements
